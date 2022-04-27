@@ -72,6 +72,10 @@ void MainScene::update () {
 }
 
 void MainScene::setupScene () {
+    // Build and compile our shader program
+    addShaders ("shaders/template_vs.glsl", "shaders/template_fs.glsl");
+    // addShaders ("shaders/untextured_vs.glsl", "shaders/untextured_fs.glsl");
+
     std::string path ("/home/matbme/Downloads/3D_Models/Pokemon/Pikachu.obj");
     auto pikachu = ModelImporter::Obj::import (path);
     pikachu->set_shader_for_all (shader);
@@ -85,6 +89,18 @@ void MainScene::setupScene () {
 
     add_object (&pikachu);
     add_object (&pikachuF);
+    
+    // std::string path ("/home/matbme/Downloads/3D_Models/Classic-NoTexture/apple.obj");
+    // auto apple = ModelImporter::Obj::import(path);
+    // apple->set_shader_for_all(shader);
+    //
+    // path = "/home/matbme/Downloads/3D_Models/Classic-NoTexture/cat.obj";
+    // auto cat = ModelImporter::Obj::import(path);
+    // cat->set_shader_for_all(shader);
+    // cat->translate (glm::vec3 (8.0f, 0.0f, 0.0f));
+    //
+    // add_object (&apple);
+    // add_object (&cat);
 
     view = glm::lookAt (cam->cameraPos, cam->cameraPos+cam->cameraFront, cam->cameraUp);
 }

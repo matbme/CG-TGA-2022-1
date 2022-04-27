@@ -23,6 +23,7 @@ public:
     static void mouse_button_callback (GLFWwindow* window, int button, int action, int mods);
 
     static bool right_click_hold;
+    static bool middle_click_hold;
 
     // Getters e setters para variaveis usadas no callback
     inline void set_lastX (float val) { this->lastX = val; }
@@ -59,6 +60,7 @@ public:
     static GLuint *scene_width, *scene_height;
     static glm::mat4 *proj_mat, *view_mat;
     static std::vector<std::unique_ptr<Model>> *objects;
+
     static bool initialized;
     static GLfloat last_ray_test_run;
     static std::unique_ptr<Model> *closest_intersect;

@@ -29,6 +29,7 @@ bool Camera::initialized = false;
 GLfloat Camera::last_ray_test_run = 0.0;
 std::unique_ptr<Model> *Camera::closest_intersect = nullptr;
 bool Camera::right_click_hold = false;
+bool Camera::middle_click_hold = false;
 
 // Instance binding access
 std::function<void (float)> Camera::set_lastX_bind = nullptr;
@@ -95,7 +96,12 @@ void Camera::mouse_callback (GLFWwindow* window, double xpos, double ypos) {
 
             for (auto mesh : obj->meshes) {
                 float t_dist = 0.0f;
-                if (Camera::_ray_sphere(get_cameraPos_bind(), ray+get_cameraFront_bind(), mesh.get_center_pos(), 3.0f, t_dist)) {
+                if (Camera::_ray_sphere(get_cameraPos_bind(),
+                                        ray+get_cameraFront_bind(),
+                                        mesh.get_center_pos(), 
+                                        3.0f, 
+                                        t_dist)) 
+                {
                     // if more than one sphere is in path of ray, only use the closest one
                     if (Camera::closest_intersect == nullptr || t_dist < closest_intersection ) {
                         Camera::closest_intersect = &obj;
@@ -116,6 +122,10 @@ void Camera::mouse_callback (GLFWwindow* window, double xpos, double ypos) {
             Camera::closest_intersect->get()->rotate (glm::radians (xoffset*3), glm::vec3 (0.0f, 0.0f, 1.0f));
             Camera::closest_intersect->get()->rotate (glm::radians (yoffset*3), glm::vec3 (1.0f, 0.0f, 0.0f));
         }
+    } 
+    else if (Camera::middle_click_hold) {
+        if (Camera::closest_intersect != nullptr)
+            Camera::closest_intersect->get()->rotate (glm::radians (xoffset*3), glm::vec3 (0.0f, 1.0f, 0.0f));
     } else {
         set_yaw_bind (get_yaw_bind () + xoffset);
         set_pitch_bind (get_pitch_bind () + yoffset);
@@ -153,6 +163,11 @@ void Camera::mouse_button_callback(GLFWwindow *window, int button, int action, i
         action == GLFW_PRESS ? 
             Camera::right_click_hold = true :
             Camera::right_click_hold = false;
+
+    else if (button == GLFW_MOUSE_BUTTON_3)
+        action == GLFW_PRESS ?
+            Camera::middle_click_hold = true :
+            Camera::middle_click_hold = false;
 }
 
 inline glm::vec3 Camera::_get_ray_from_mouse (float mouse_x, float mouse_y) {

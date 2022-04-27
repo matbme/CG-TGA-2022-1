@@ -46,9 +46,6 @@ Scene::Scene (GLuint width, GLuint height, std::string window_name) {
     if (!gladLoadGLLoader ((GLADloadproc) glfwGetProcAddress))
         std::cout << "Failed to initialize GLAD" << std::endl;
 
-    // Build and compile our shader program
-    addShaders ("shaders/template_vs.glsl", "shaders/template_fs.glsl");
-
     Scene::window_resized = true;
 }
 
@@ -128,7 +125,6 @@ void Scene::setupCamera () {
 
 	glEnable (GL_DEPTH_TEST);
 
-    glLineWidth (10.0f);
     // Enable face culling
     glEnable(GL_CULL_FACE);
 

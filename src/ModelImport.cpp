@@ -21,6 +21,7 @@ std::unique_ptr<Model> ModelImporter::Obj::import (std::string const &path) {
     std::string line;
     while (std::getline (file, line)) {
         if (line == "\r") continue; // Ignore carriage returns
+        if (line == "") continue; // Ignore empty lines
         if (line[0] == '#') continue; // Ignore comments
 
         if (new_mesh) {

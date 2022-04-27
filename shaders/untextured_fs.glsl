@@ -1,9 +1,13 @@
 #version 450 core
-in vec4 finalColor;
-
 out vec4 color;
+
+in vec4 finalColor;
+flat in int Highlight;
 
 void main()
 {
-    color = finalColor;
+    if (Highlight == 1)
+        color = finalColor + vec4(0.5, 0.5, 0.5, 0.0);
+    else
+        color = finalColor;
 }

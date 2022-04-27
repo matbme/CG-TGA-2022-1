@@ -95,6 +95,10 @@ void Mesh::draw () {
 
         glActiveTexture (GL_TEXTURE0);
     }
+    else {
+        if (highlight) glUniform1i (glGetUniformLocation (shader->ID, "texHighlight"), 1);
+        else glUniform1i (glGetUniformLocation (shader->ID, "texHighlight"), 0);
+    }
 
     glBindVertexArray (VAO);
     glDrawElements (GL_TRIANGLES, indices.size (), GL_UNSIGNED_INT, 0);
