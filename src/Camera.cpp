@@ -150,7 +150,7 @@ void Camera::mouse_callback (GLFWwindow* window, double xpos, double ypos) {
 
 void Camera::scroll_callback (GLFWwindow *window, double xoffset, double yoffset) {
     if (closest_intersect != nullptr) {
-        glm::vec3 scale_factors;
+        glm::vec3 scale_factors = glm::vec3(1.0f, 1.0f, 1.0f);
         if (yoffset > 0) scale_factors = glm::vec3 (1.1f, 1.1f, 1.1f);
         else if (yoffset < 0) scale_factors = glm::vec3 (0.9f, 0.9f, 0.9f);
 

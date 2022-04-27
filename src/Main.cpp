@@ -1,7 +1,7 @@
-/* Template para desenvolvimento de atividades da disciplina
+/* Entrega Grau A
  * Computação Gráfica, ministrada pela prof. Rossana Baptista Queiroz.
  *
- * Developer: Mateus Melchiades <mateusbme@edu.unisinos.br>
+ * Developers: Felipe Peters, Mateus Melchiades e Pedro Accorsi
  */
 
 #include "KeyEvent.h"

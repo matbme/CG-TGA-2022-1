@@ -3,7 +3,7 @@ layout (location = 0) in vec3 position;
 layout (location = 1) in vec3 color;
 
 out vec4 finalColor;
-out int Highlight;
+flat out int Highlight;
 
 uniform mat4 model;
 uniform mat4 view;
