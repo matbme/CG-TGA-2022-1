@@ -1,6 +1,5 @@
 #include "Scene.h"
 #include "KeyEvent.h"
-#include <GLFW/glfw3.h>
 
 bool Scene::window_resized = false;
 GLuint Scene::window_width = 0;
@@ -38,6 +37,7 @@ Scene::Scene (GLuint width, GLuint height, std::string window_name) {
     glfwSetKeyCallback (window, key_callback);
     glfwSetCursorPosCallback (window, Camera::mouse_callback);
     glfwSetScrollCallback (window, Camera::scroll_callback);
+    glfwSetMouseButtonCallback (window, Camera::mouse_button_callback);
 
     // Setando a callback de redimensionamento da janela
     glfwSetWindowSizeCallback (window, resize);
@@ -47,7 +47,7 @@ Scene::Scene (GLuint width, GLuint height, std::string window_name) {
         std::cout << "Failed to initialize GLAD" << std::endl;
 
     // Build and compile our shader program
-    addShaders ("shaders/template.vs", "shaders/template.fs");
+    addShaders ("shaders/template_vs.glsl", "shaders/template_fs.glsl");
 
     Scene::window_resized = true;
 }
@@ -127,6 +127,18 @@ void Scene::setupCamera () {
     glUniformMatrix4fv (projLoc, 1, GL_FALSE, glm::value_ptr (projection));
 
 	glEnable (GL_DEPTH_TEST);
+
+    glLineWidth (10.0f);
+    // Enable face culling
+    glEnable(GL_CULL_FACE);
+
+    Camera::scene_width = &Scene::window_width;
+    Camera::scene_height = &Scene::window_height;
+    Camera::proj_mat = &this->projection;
+    Camera::view_mat = &this->view;
+    Camera::objects = &this->objects;
+
+    Camera::initialized = true;
 }
 
 unsigned int Scene::add_object (std::unique_ptr<Model> *object) {

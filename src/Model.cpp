@@ -15,9 +15,23 @@ void Model::setup_meshes () {
     }
 }
 
-void Model::set_shader(Shader *shader) {
+void Model::set_shader_for_all (Shader *shader) {
     for (int i = 0 ; i < meshes.size() ; i++) {
         meshes[i].setShader (shader);
+    }
+}
+
+void Model::set_shader_for_textured (Shader *shader) {
+    for (int i = 0 ; i < meshes.size() ; i++) {
+        if (!meshes[i].textures.empty())
+            meshes[i].setShader (shader);
+    }
+}
+
+void Model::set_shader_for_untextured (Shader *shader) {
+    for (int i = 0 ; i < meshes.size() ; i++) {
+        if (meshes[i].textures.empty())
+            meshes[i].setShader (shader);
     }
 }
 
@@ -42,5 +56,17 @@ void Model::rescale (glm::vec3 scaleFactors, bool reset) {
 void Model::update () {
     for (auto mesh : meshes) {
         mesh.update ();
+    }
+}
+
+void Model::highlight () {
+    for (int i = 0 ; i < meshes.size() ; i++) {
+        meshes[i].set_highlight(true);
+    }
+}
+
+void Model::remove_highlight () {
+    for (int i = 0 ; i < meshes.size() ; i++) {
+        meshes[i].set_highlight(false);
     }
 }

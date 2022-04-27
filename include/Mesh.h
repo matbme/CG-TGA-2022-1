@@ -6,6 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <array>
+#include <limits>
 #include <map>
 #include <memory>
 #include <vector>
@@ -54,6 +55,7 @@ public:
 
     void setup ();
     void draw ();
+    void draw_wire ();
 
     void rotate (float angle, glm::vec3 axis, bool reset = false);
     void translate (glm::vec3 displacements, bool reset = false);
@@ -61,11 +63,18 @@ public:
 
     void update ();
 
+    glm::vec3 get_center_pos () { return this->center_pos; }
+
     void setShader (Shader *shader);
+
+    void set_highlight (bool value) { this->highlight = value; }
 private:
     glm::mat4 model;
     glm::vec3 pos, scale;
     float angle;
+    bool highlight;
+
+    glm::vec3 center_pos;
 
     Shader *shader;
 

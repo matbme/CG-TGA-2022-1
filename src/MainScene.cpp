@@ -74,11 +74,11 @@ void MainScene::update () {
 void MainScene::setupScene () {
     std::string path ("/home/matbme/Downloads/3D_Models/Pokemon/Pikachu.obj");
     auto pikachu = ModelImporter::Obj::import (path);
-    pikachu->set_shader (shader);
+    pikachu->set_shader_for_all (shader);
 
     path = "/home/matbme/Downloads/3D_Models/Pokemon/PikachuF.obj";
     auto pikachuF = ModelImporter::Obj::import (path);
-    pikachuF->set_shader (shader);
+    pikachuF->set_shader_for_all (shader);
 
     pikachuF->translate (glm::vec3 (8.0f, 0.0f, 0.0f));
     pikachuF->rescale (glm::vec3 (0.1f, 0.1f, 0.1f));
