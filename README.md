@@ -18,3 +18,12 @@ Para executar:
 ```
 $ ./app
 ```
+
+## Controles
+
+- `W, A, S, D` movimentar a câmera
+- `Shift` subir a câmera
+- `Ctrl` descer a câmera
+- `Segurar bot. direito do mouse` rotacionar modelo selecionado
+- `Segurar scroll do mouse` rotacionar modelo no eixo
+- `Scroll do mouse` aumentar/diminuir o modelo
